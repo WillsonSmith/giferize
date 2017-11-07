@@ -1,0 +1,12 @@
+name: gif-maker-gem
+type:
+  - ruby
+
+up:
+  - homebrew:
+    - ffmpeg
+  - ruby: 2.3.3
+  - bundler
+
+commands:
+  test: bundle exec rspec spec #bin/testunit
