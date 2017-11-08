@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "gif_maker_gem/version"
+require "giferizer/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "gif_maker_gem"
-  spec.version       = GifMakerGem::VERSION
+  spec.name          = "giferizer"
+  spec.version       = Giferizer::VERSION
   spec.authors       = ["Willson Smith"]
   spec.email         = ["me@willsonsmith.com"]
 

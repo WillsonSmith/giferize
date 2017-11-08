@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "gif_maker_gem"
+require "giferizer"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

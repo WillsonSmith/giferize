@@ -1,15 +1,15 @@
 require "spec_helper"
 
-RSpec.describe GifMakerGem do
+RSpec.describe Giferizer do
 
   before(:each) do
-    @movie = GifMakerGem::GifMaker.new(
+    @movie = Giferizer::Giferizer.new(
       "#{Pathname.new(File.dirname __dir__)}/spec/test_files/demo-recording.mp4"
     )
   end
 
   it "has a version number" do
-    expect(GifMakerGem::VERSION).not_to be nil
+    expect(Giferizer::VERSION).not_to be nil
   end
 
   it "returns movie url" do

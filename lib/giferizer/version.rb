@@ -1,3 +1,3 @@
-module GifMakerGem
+module Giferizer 
   VERSION = "0.1.0"
 end

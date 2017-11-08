@@ -1,8 +1,8 @@
-require "gif_maker_gem/version"
+require "giferizer/version"
 require 'streamio-ffmpeg'
 
-module GifMakerGem
-  class GifMaker
+module Giferizer
+  class Giferizer 
     attr_reader :movie
     def initialize(file)
       @movie = FFMPEG::Movie.new(file)
@@ -19,14 +19,26 @@ module GifMakerGem
       }
     end
 
-    def giferize(dir, frame_rate: 25, scale: longest_edge, flags: 'lanczos', crop: {width: dimensions[:width], height: dimensions[:height], x: 0, y: 0})
+    def giferize(
+      dir,
+      output_name: 'movie',
+      frame_rate: 25,
+      scale: longest_edge,
+      flags: 'lanczos',
+      crop: {
+        width: dimensions[:width],
+        height: dimensions[:height],
+        x: 0,
+        y: 0
+      }
+    )
       filters = [
         "fps=#{frame_rate}",
         "crop=#{crop[:width]}:#{crop[:height]}:#{crop[:x]}:#{crop[:y]}",
         "scale=#{scale}:-1:flags=#{flags}"
       ].join(',')
 
-      gif = "#{dir}/movie.gif"
+      gif = "#{dir}/#{output_name}.gif"
       palette = "#{dir}/palette.png"
       
       options_for_palette = {
