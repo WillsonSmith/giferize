@@ -19,8 +19,12 @@ module GifMakerGem
       }
     end
 
-    def giferize(dir, frame_rate: 25, scale: longest_edge, flags: 'lanczos')
-      filters = "fps=#{frame_rate},scale=#{scale}:-1:flags=#{flags}"
+    def giferize(dir, frame_rate: 25, scale: longest_edge, flags: 'lanczos', crop: {width: dimensions[:width], height: dimensions[:height], x: 0, y: 0})
+      filters = [
+        "fps=#{frame_rate}",
+        "crop=#{crop[:width]}:#{crop[:height]}:#{crop[:x]}:#{crop[:y]}",
+        "scale=#{scale}:-1:flags=#{flags}"
+      ].join(',')
 
       gif = "#{dir}/movie.gif"
       palette = "#{dir}/palette.png"
@@ -39,11 +43,12 @@ module GifMakerGem
           "-lavfi", "#{filters} [x]; [x][1:v] paletteuse"
         ]
       }
-      File.delete(gif) if File.exist?(gif)
 
       movie.transcode(palette, options_for_palette)
-      movie.transcode(gif, options_for_final)
+      transcoded_gif = movie.transcode(gif, options_for_final)
       File.delete(palette) if File.exist?(palette)
+
+      transcoded_gif
     end
 
     private
